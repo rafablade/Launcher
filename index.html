@@ -86,31 +86,23 @@
       padding: 16px 20px 14px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      justify-content: center;
     }
     .card-title {
       color: var(--white);
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
-      line-height: 1.25;
-    }
-    .card-version {
-      background: rgba(255,255,255,.18);
-      color: var(--white);
-      font-size: .72rem;
-      font-weight: 600;
-      padding: 3px 9px;
-      border-radius: 20px;
+      line-height: 1.2;
       white-space: nowrap;
-      letter-spacing: .3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
     }
-
     .card-body {
       padding: 14px 20px 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
     }
 
     /* URL pill */
@@ -151,12 +143,11 @@
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: .75rem;
+      gap: 4px;
+      font-size: .7rem;
       font-weight: 600;
-      padding: 3px 10px;
+      padding: 2px 8px;
       border-radius: 20px;
-      margin: 0 20px 14px;
     }
     .badge.android {
       background: #E8F5E9;
@@ -168,7 +159,19 @@
       color: #1565C0;
       border: 1px solid #90CAF9;
     }
+    .badge.windows {
+      background: #EDE7F6;
+      color: #4527A0;
+      border: 1px solid #B39DDB;
+    }
     .badge svg { width: 13px; height: 13px; }
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 0 14px 14px;
+      justify-content: center;
+    }
 
     /* ── Footer ──────────────────────────────────────── */
     footer {
@@ -191,72 +194,92 @@
   <main class="grid">
 
     <!-- RAE -->
-    <a class="card" href="https://tne-rae.vercel.app" target="_blank" rel="noopener" onclick="return openApp('https://rafablade.github.io/tne-rae/')">
+    <a class="card" href="https://rafablade.github.io/tne-rae/" target="_blank" rel="noopener">
       <div class="card-head">
         <span class="card-title">RAE — Registro de Atividades e Efetivo</span>
-        <span class="card-version">v0.4</span>
       </div>
       <div class="card-body">
-        <span class="url-pill">apps.timenow.eng.br/rae</span>
         <span class="open-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Abrir
+        </span>
+      </div>
+      <div class="badge-group">
+        <span class="badge android">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Android
+        </span>
+        <span class="badge iphone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+          iPhone
+        </span>
+        <span class="badge windows">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
+          Windows
         </span>
       </div>
     </a>
 
-    <!-- RIA Android -->
-    <a class="card" href="#" onclick="return openApp('https://rafablade.github.io/ria-andaimes/')">
+    <!-- RIA -->
+    <a class="card" href="https://rafablade.github.io/ria-andaimes/" target="_blank" rel="noopener">
       <div class="card-head">
         <span class="card-title">RIA — Relatório de Inspeção de Andaimes</span>
-        <span class="card-version">v3.7</span>
       </div>
       <div class="card-body">
-        <span class="url-pill">apps.timenow.eng.br/ria</span>
         <span class="open-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Abrir
         </span>
       </div>
-      <span class="badge android">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-        Android
-      </span>
-    </a>
-
-    <!-- RIA iOS -->
-    <a class="card" href="#" onclick="return openApp('https://rafablade.github.io/ria-andaimes-ios/')">
-      <div class="card-head">
-        <span class="card-title">RIA — Relatório de Inspeção de Andaimes</span>
-        <span class="card-version">v1.0</span>
-      </div>
-      <div class="card-body">
-        <span class="url-pill">apps.timenow.eng.br/ria-ios</span>
-        <span class="open-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Abrir
+      <div class="badge-group">
+        <span class="badge android">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Android
+        </span>
+        <span class="badge iphone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+          iPhone
+        </span>
+        <span class="badge windows">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
+          Windows
         </span>
       </div>
-      <span class="badge iphone">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
-        iPhone
-      </span>
     </a>
 
   </main>
 
   <footer>
     <strong>TimeNow Engenharia</strong><br/>
-    &copy; <span id="yr"></span> Rafael Cavalcanti Moreira — Todos os direitos reservados
+    &copy; <span id="yr"></span> Rafael Cavalcanti Moreira — Todos os direitos reservados<br/>
+    <span style="font-size:.7rem;opacity:.7;">Launcher v0.4</span>
   </footer>
 
   <script>
+    /*
+     * ═══════════════════════════════════════════
+     *  VERSÕES DOS APPS — atualize aqui quando
+     *  qualquer app receber uma nova versão
+     * ═══════════════════════════════════════════
+     *  LAUNCHER  v0.1 — criação inicial
+     *            v0.2 — correção do logotipo
+     *            v0.4 — títulos menores (uma linha), badges RAE,
+     *                   espaçamento compacto nos badges
+     * ═══════════════════════════════════════════
+     */
+    const VERSOES = {
+      rae: 'v1.0',
+      ria: 'v3.7',
+      launcher: 'v0.4'
+    };
+
+    // Injeta versões diretamente pelos IDs — sem depender de leitura de texto
+    document.getElementById('ver-rae').textContent = VERSOES.rae;
+    document.getElementById('ver-ria').textContent = VERSOES.ria;
+
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    function openApp(url) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-      return false;
-    }
+    function openApp(url) { /* não utilizado */ }
   </script>
 </body>
 </html>
