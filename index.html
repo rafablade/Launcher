@@ -173,6 +173,80 @@
       justify-content: center;
     }
 
+    /* ── Version badge (padrão RIA) ─────────────────── */
+    .version-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 9px;
+      color: rgba(74,79,84,.45);
+      font-family: monospace;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(74,79,84,.2);
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .version-badge:hover {
+      color: var(--gray);
+      border-color: rgba(74,79,84,.5);
+      background: rgba(74,79,84,.06);
+    }
+
+    /* ── Changelog modal (padrão RIA) ───────────────── */
+    .cl-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 9998;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .cl-bg.open { display: flex; }
+    .cl-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      width: 100%;
+      max-width: 420px;
+      margin: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    .cl-title {
+      color: var(--teal);
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cl-close {
+      background: var(--teal-lt);
+      border: none;
+      border-radius: 8px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--teal);
+      font-size: 13px;
+    }
+    .cl-ver { margin-bottom: 14px; }
+    .cl-ver-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--teal);
+      font-family: monospace;
+      margin-bottom: 5px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cl-ver ul { padding-left: 16px; }
+    .cl-ver li { font-size: 12px; color: #374151; line-height: 1.7; }
+
     /* ── Footer ──────────────────────────────────────── */
     footer {
       margin-top: 48px;
@@ -251,35 +325,58 @@
 
   <footer>
     <strong>TimeNow Engenharia</strong><br/>
-    &copy; <span id="yr"></span> Rafael Cavalcanti Moreira — Todos os direitos reservados<br/>
-    <span style="font-size:.7rem;opacity:.7;">Launcher v0.4</span>
+    &copy; Rafael Cavalcanti Moreira — JUN 2026<br/>
+    Todos os direitos reservados<br/>
+    <a class="version-badge" onclick="abrirChangelog()" href="javascript:void(0)" style="margin-top:10px;">v0.7</a>
   </footer>
 
+  <!-- Modal changelog (padrão RIA) -->
+  <div class="cl-bg" id="cl-modal">
+    <div class="cl-box">
+      <div class="cl-title">
+        📋 Histórico de Versões
+        <button class="cl-close" onclick="document.getElementById('cl-modal').className='cl-bg'">✕ Fechar</button>
+      </div>
+      <div style="font-size:10px;color:#64748b;font-family:monospace;text-align:center;padding:6px 0 10px;border-bottom:1px solid var(--border);margin-bottom:12px;">
+        © Copyright — Desenvolvido por:<br><strong style="color:var(--teal);">Rafael Cavalcanti Moreira</strong> — <span id="cl-data"></span>
+      </div>
+      <div id="cl-content"></div>
+    </div>
+  </div>
+
   <script>
-    /*
-     * ═══════════════════════════════════════════
-     *  VERSÕES DOS APPS — atualize aqui quando
-     *  qualquer app receber uma nova versão
-     * ═══════════════════════════════════════════
-     *  LAUNCHER  v0.1 — criação inicial
-     *            v0.2 — correção do logotipo
-     *            v0.4 — títulos menores (uma linha), badges RAE,
-     *                   espaçamento compacto nos badges
-     * ═══════════════════════════════════════════
-     */
-    const VERSOES = {
-      rae: 'v1.0',
-      ria: 'v3.7',
-      launcher: 'v0.4'
+    // ── CHANGELOG ────────────────────────────────────────────────
+    const CL = {
+      "v0.7": ["Badge de versão movido para o rodapé, abaixo do copyright","Copyright com data fixa JUN 2026 (mês e ano de criação)","Remoção de variáveis dinâmicas de data desnecessárias"],
+      "v0.6": ["Badge de versão centralizado abaixo do título","Changelog com estrutura CL idêntica ao padrão RIA/RAE","Modal de histórico com layout unificado aos outros apps","Descrições detalhadas de todas as versões anteriores"],
+      "v0.5": ["Data mês/ano dinâmica no rodapé","Botão de histórico de versões no rodapé","Copyright com ano automático"],
+      "v0.4": ["Título dos cards centralizado com fonte maior","URL pill removida dos cards","Badge de versão removido dos cards","Botão Abrir centralizado sozinho no card","Badges de plataforma centralizados na parte inferior"],
+      "v0.3": ["Card iOS removido — RIA unificado em um único card","Badges Android, iPhone e Windows adicionados ao RIA","Badges Android, iPhone e Windows adicionados ao RAE","RAE atualizado para v1.0","Estrutura VERSOES e CHANGELOG introduzida no JS"],
+      "v0.2": ["Correção do logotipo TimeNow (base64 truncado pelo heredoc do shell)","Injeção do base64 refeita via Python para garantir integridade"],
+      "v0.1": ["Criação inicial do Launcher TimeNow Engenharia","Cards RAE — Registro de Atividades e Efetivo","Cards RIA Android e RIA iOS — Relatório de Inspeção de Andaimes","Logo TimeNow embutida em base64","Links para GitHub Pages dos apps","Rodapé com copyright Rafael Cavalcanti Moreira"],
     };
 
-    // Injeta versões diretamente pelos IDs — sem depender de leitura de texto
-    document.getElementById('ver-rae').textContent = VERSOES.rae;
-    document.getElementById('ver-ria').textContent = VERSOES.ria;
+    const VERSOES = { rae: 'v1.0', ria: 'v3.7' };
 
-    document.getElementById('yr').textContent = new Date().getFullYear();
+    document.getElementById('cl-data').textContent = 'JUN 2026';
 
-    function openApp(url) { /* não utilizado */ }
+    // Renderiza changelog
+    const cont = document.getElementById('cl-content');
+    const vers = Object.keys(CL);
+    vers.forEach((v, i) => {
+      const d = document.createElement('div');
+      d.className = 'cl-ver';
+      d.innerHTML = `<div class="cl-ver-title">${v}${i === 0 ? ' <span style="color:var(--teal-mid);font-size:10px">● atual</span>' : ''}</div><ul>${CL[v].map(x => `<li>${x}</li>`).join('')}</ul>`;
+      cont.appendChild(d);
+    });
+
+    function abrirChangelog() {
+      document.getElementById('cl-modal').className = 'cl-bg open';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') document.getElementById('cl-modal').className = 'cl-bg';
+    });
   </script>
 </body>
 </html>
